@@ -1,0 +1,42 @@
+Netty的主要构建块
+Channel
+回调
+Future
+事件和ChannelHandler
+
+Channel是Java NIO的一个基本构造
+    它代表一个到实体（如一个硬件设备、一个文件、一个网络套接字或者一个能够执行一个或者多个不同的I/O操作的程序组件）的
+    开放连接，如读操作和写操作
+
+回调
+public class ConnectHandler extends ChannelInboundHandlerAdapter {
+    /**
+     * 当一个新的连接已经被建立时，channelActive(ChannelHandler Context)将会被调用
+     */
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("Client " + ctx.channel().remoteAddress() + " connected");
+    }
+}
+
+Future
+提供了另一种在操作完成时通知应用程序的方式。这个对象可以看作是一个异步操作的结果的占位符；它将在未来的某个时刻完成，并提供对其结果的访问。
+
+异步地建立连接
+Channel channel = ....;
+// Does not block
+// 异步地连接到远程节点
+ChannelFuture future = channel.connect(new InetSocketAddress("192.168.0.1", 25);
+future.addListener(new ChannelFutureListener() {
+    @Override
+    public void operationComplete(ChannelFuture future) {
+        if(future.isSuccess()) {
+            ByteBuf buffer = Unpooled.copiedBuffer("Hello", Charset.defaultCharset());
+            ChannelFuture wf = future.channel().writeAndFlush(buffer);
+            ...
+        } else {
+            Throwable cause = future.cause();
+            cause.printStackTrace();
+        }
+    }
+});
