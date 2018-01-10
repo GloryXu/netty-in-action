@@ -1,4 +1,4 @@
-package code.chapter01.three.three;
+package chapter01.three.three;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

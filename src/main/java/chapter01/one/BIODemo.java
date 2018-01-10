@@ -1,4 +1,4 @@
-package code.chapter01.one;
+package chapter01.one;
 
 import java.io.BufferedReader;
 import java.io.IOException;

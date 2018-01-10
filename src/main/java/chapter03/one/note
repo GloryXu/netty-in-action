@@ -1,0 +1,26 @@
+Channel——Socket
+EventLoop——控制流、多线程处理、并发
+ChannelFuture——异步通知
+
+EmbeddedChannel
+LocalServerChannel
+NioDatagramChannel
+NioSctpChannel
+NioSocketChannel
+
+创建Channel-->将Channel注册到EventLoop-->在整个生命周期内都使用EventLoop处理I/O事件
+三者关系为：
+    一个EventLoopGroup包含一个或者多个EventLoop
+    一个EventLoop在它的生命周期内只和一个Thread绑定
+    所有由EventLoop处理的I/O事件都将在它专有的Thread上被处理
+    一个Channel在它的生命周期内只注册于一个EventLoop
+    一个EventLoop可能会被分配给一个或多个Channel
+
+
+ChannelPipeline接口
+ChannelPipeline提供了ChannelHandler链的容器，并定义了用于在该链上传播入站和出站事件流的API。
+当Channel被创建时，它会被自动的分配到它专属的ChannelPipeline。
+ChannelHandler安装到ChannelPipeline中的过程如下所示：
+    一个ChannelInitializer的实现被注册到了ServerBootstrap中
+    当ChannelInitializer.iniChannel()方法被调用时，ChannelInitializer将在ChannelPipeline中安装一组自定义的ChannelHandler
+    ChannelInitializer将它自己从ChannelPipeline中移除

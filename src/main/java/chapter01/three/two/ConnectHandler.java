@@ -1,4 +1,4 @@
-package code.chapter01.three.two;
+package chapter01.three.two;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
