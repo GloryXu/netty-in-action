@@ -18,15 +18,15 @@ public class EchoServer {
         this.port = port;
     }
 
-    public static void main(String[] args) throws Exception{
-        if(args.length != 1) {
+    public static void main(String[] args) throws Exception {
+        if (args.length != 1) {
             System.out.println("Usage:" + EchoServer.class.getSimpleName() + " <port>");
         }
         int port = Integer.parseInt(args[0]);
         new EchoServer(port).start();
     }
 
-    private void start() throws Exception{
+    private void start() throws Exception {
         final EchoServerHandler serverHandler = new EchoServerHandler();
         EventLoopGroup group = new NioEventLoopGroup();
         try {
@@ -46,7 +46,7 @@ public class EchoServer {
             //获取Channel的CloseFuture，并且阻塞当前线程直到它完成
             f.channel().closeFuture().sync();
         } catch (Exception e) {
-
+            e.printStackTrace();
         } finally {
             group.shutdownGracefully().sync();
         }

@@ -1,0 +1,45 @@
+Channel——Socket
+EventLoop——控制流、多线程处理、并发
+ChannelFuture——异步通知
+
+EmbeddedChannel
+LocalServerChannel
+NioDatagramChannel
+NioSctpChannel
+NioSocketChannel
+
+创建Channel-->将Channel注册到EventLoop-->在整个生命周期内都使用EventLoop处理I/O事件
+三者关系为：
+    一个EventLoopGroup包含一个或者多个EventLoop
+    一个EventLoop在它的生命周期内只和一个Thread绑定
+    所有由EventLoop处理的I/O事件都将在它专有的Thread上被处理
+    一个Channel在它的生命周期内只注册于一个EventLoop
+    一个EventLoop可能会被分配给一个或多个Channel
+
+
+---3.2.2
+ChannelPipeline接口
+ChannelPipeline提供了ChannelHandler链的容器，并定义了用于在该链上传播入站和出站事件流的API。
+当Channel被创建时，它会被自动的分配到它专属的ChannelPipeline。
+ChannelHandler安装到ChannelPipeline中的过程如下所示：
+    一个ChannelInitializer的实现被注册到了ServerBootstrap中
+    当ChannelInitializer.iniChannel()方法被调用时，ChannelInitializer将在ChannelPipeline中安装一组自定义的ChannelHandler
+    ChannelInitializer将它自己从ChannelPipeline中移除
+
+从客户端应用程序角度来看，如果事件的运动方向是从客户端到服务端，那么我们称这些事件为出站的，反之则称为入站的。
+（注：5.0的Netty将ChannelInBoundHandler和ChannelOutboundHandler均换成ChannelHandlerAdapter）
+
+在Netty中，有两种发送消息的方式。可以直接写到Channel中，也可以写到和ChannelHandler相关联的ChannelHandlerContext对象中。
+前一种方式将会导致消息从ChannelPipeline的尾端开始流动，而后者将导致消息从ChannelPipeline中的下一个ChannelHandler开始流动。
+
+---3.3
+类别                          bootstrap                   ServerBootstrap
+--------------------------------------------------------------------------
+网络编程中的作用              连接到远程主机和端口        绑定到一个本地端口
+EventLoopGroup的数目          1                           2
+--------------------------------------------------------------------------
+两种引导类直接的区别：
+1.ServerBootstrap将绑定到一个端口，因为服务器必须要监听连接，而Bootstrap则是由想要连接到远程节点的客户端应用程序所使用的
+2.客户端只需要一个EventLoopGroup，一个ServerBootstrap需要两个（可以是同一个实例）
+    第一组将只包含一个ServerChannel，代表服务器自身的已绑定到某个本地端口的正在监听的套接字
+    第二组将包含所有已创建的用来处理传入客户端连接（对于每个服务器已经接受的连接都有一个）的Channel
