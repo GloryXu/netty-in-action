@@ -1,0 +1,12 @@
+每个Channel都将会分配一个ChannelPipeline和ChannelConfig
+ChannelConfig包含了该Channel的所有配置设置，并且支持热更新。
+
+ChannelHandler的典型用途：
+1.将数据从一种格式转换为另一种格式
+2.提供异常的通知
+3.提供Channel变为活动的或者非活动的通知
+4.提供当Channel注册到EventLoop或者从EventLoop注销时的通知
+5.提供有关用户自定义事件的通知
+
+ChannelPipeline实现了一个常见的设计模式——拦截过滤器
+（类似于UNIX管道）

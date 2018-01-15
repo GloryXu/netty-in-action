@@ -1,0 +1,7 @@
+Epoll——用户Linux的本地非阻塞传输
+epoll—— 一个高度可扩展的I/O时间通知特性
+
+（如果你的应用程序旨在运行于Linux系统，那么请考虑利用这个版本的传输；你将发现在高负载下它的性能要优于JDK的NIO实现）
+
+使用epoll替代NIO
+只需要将NioEventLoopGroup替换为EpollEventLoopGroup，并且将NioServerSocketChannel.class替换为EpollServerSocketChannel.class即可
