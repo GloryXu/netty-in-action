@@ -1,0 +1,22 @@
+5.5.2 Unpooled缓冲区
+Unpooled的方法
+---返回一个未池化的基于堆内存存储的ByteBuf
+buffer()
+buffer(int initialCapacity)
+buffer(int initialCapacity, init maxCapacity)
+
+---返回一个未池化的基于直接内存存储的ByteBuf
+directBuffer()
+directBuffer(int initialCapacity)
+directBuffer(int initialCapacity, int maxCapacity)
+
+---返回一个包装了给定数据的ByteBuf
+wrappedBuffer()
+
+---返回一个复制了给定数据的ByteBuf
+copiedBuffer()
+
+
+5.5.3 ByteBufUtil 类
+hexdump() ----->以十六进制的表示形式打印ByteBuf 的内容
+boolean equals(ByteBuf, ByteBuf) ----->判断两个ByteBuf实例的相等性

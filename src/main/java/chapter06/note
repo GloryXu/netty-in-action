@@ -1,0 +1,19 @@
+6.1.1 Channel的生命周期
+Channel 的生命周期状态
+ChannelUnregistered -- Channel 已经被创建，但还未注册到EventLoop
+ChannelRegistered -- Channel 已经被注册到了EventLoop
+ChannelActive -- Channel 处于活动状态（已经连接到它的远程节点）。它现在可以接收和发送数据了
+ChannelInactive -- Channel 没有连接到远程节点
+
+Channel的正常周期如下
+ChannelRegistered--》ChannelActive--》ChannelInactive--》ChannelUnregistered
+
+6.1.2 ChannelHandler 的生命周期
+handlerAdded --》当把ChannelHandler 添加到ChannelPipeline 中时被调用
+handlerRemoved --》当从ChannelPipeline 中移除ChannelHandler 时被调用
+exceptionCaught --》当处理过程中在ChannelPipeline 中有错误产生时被调用
+
+6.1.6 资源管理
+为了帮助你诊断潜在的（资源泄漏）问题，Netty提供了class ResourceLeakDetector（使用JDK的虚引用来实现），
+它将对你应用程序的缓冲区分配做大约1%的采样来检测内存泄露。
+
