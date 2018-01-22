@@ -17,3 +17,18 @@ exceptionCaught --》当处理过程中在ChannelPipeline 中有错误产生时�
 为了帮助你诊断潜在的（资源泄漏）问题，Netty提供了class ResourceLeakDetector（使用JDK的虚引用来实现），
 它将对你应用程序的缓冲区分配做大约1%的采样来检测内存泄露。
 
+
+6.2
+ChannelHandlerContext
+ChannelHandlerContext使得ChannelHandler能够和它的ChannelPipeline以及其他的ChannelHandler 交互。ChannelHandler 可以通知其所属的ChannelPipeline 中的下一个
+ChannelHandler，甚至可以动态修改它所属的ChannelPipeline。
+
+6.2.1
+ChannelHandler 的执行和阻塞
+通常ChannelPipeline 中的每一个ChannelHandler 都是通过它的EventLoop（I/O 线程）来处
+理传递给它的事件的。所以至关重要的是不要阻塞这个线程，因为这会对整体的I/O 处理产生负面的影响。
+
+总结一下：
+ChannelPipeline 保存了与Channel 相关联的ChannelHandler；
+ChannelPipeline 可以根据需要，通过添加或者删除ChannelHandler 来动态地修改；
+ChannelPipeline 有着丰富的API 用以被调用，以响应入站和出站事件。
