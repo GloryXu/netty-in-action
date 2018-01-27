@@ -1,0 +1,12 @@
+所有的EventLoop都由这个EventLoopGroup分配，有三个正在使用的EventLoop
+                      EventLoopGroup
+                            |
+                            |
+每个EventLoop将处理分配给它的所有Channel的所有事件和任务，每个EventLoop都和一个Thread相关联
+          EventLoop         EventLoop           EventLoop
+              |                 |                   |
+EventLoopGroup将为每个新创建的Channel分配一个EventLoop。在每个Channel的整个生命周期内，所有的操作都将由相同的Thread执行
+          N个Channel         M个Channel           L个Channel
+
+
+使用顺序循环（round-robin）的方式进行分配以获取一个均衡的分布，并且相同的EventLoop可能会被分配给多个Channel
