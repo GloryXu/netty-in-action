@@ -1,9 +1,9 @@
 package chapter01.three.two;
 
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class ConnectHandler extends ChannelHandlerAdapter {
+public class ConnectHandler extends ChannelInboundHandlerAdapter {
 
     /**
      * 当一个新的连接已经被建立时，channelActive(ChannelHandler Context)将会被调用

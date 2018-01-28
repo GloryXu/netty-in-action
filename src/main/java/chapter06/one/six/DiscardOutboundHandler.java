@@ -1,11 +1,11 @@
 package chapter06.one.six;
 
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelOutboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
 import io.netty.util.ReferenceCountUtil;
 
-public class DiscardOutboundHandler extends ChannelHandlerAdapter {
+public class DiscardOutboundHandler extends ChannelOutboundHandlerAdapter {
     /**
      * 重要的是，不仅要释放资源，还要通知ChannelPromise。
      * 否则可能会出现ChannelFutureListener收不到某个消息已经被处理了的通知的情况
