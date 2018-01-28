@@ -1,0 +1,17 @@
+writeInbound(Object... msgs)                    Writes an inbound message to the EmbeddedChannel. Returns
+                                                true if data can be read from the EmbeddedChannel via
+-------------------------------------------------------------------------------------------------------------
+readInbound().readInbound()                     Reads an inbound message from the EmbeddedChannel. Anything
+                                                returned traversed the entire ChannelPipeline. Returns null if
+                                                nothing is ready to read.
+-------------------------------------------------------------------------------------------------------------
+writeOutbound(Object... msgs)                   Writes an outbound message to the EmbeddedChannel. Returns
+                                                true if something can now be read from the EmbeddedChannel
+                                                via readOutbound().
+-------------------------------------------------------------------------------------------------------------
+readOutbound()                                  Reads an outbound message from the EmbeddedChannel. Anything
+                                                returned traversed the entire ChannelPipeline. Returns null if
+                                                nothing is ready to read.
+                                                finish() Marks the EmbeddedChannel as complete and returns true if
+                                                either inbound or outbound data can be read. This will also call
+                                                close() on the EmbeddedChannel.
