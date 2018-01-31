@@ -1,6 +1,5 @@
 package chapter11.one;
 
-import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.handler.ssl.SslContext;
