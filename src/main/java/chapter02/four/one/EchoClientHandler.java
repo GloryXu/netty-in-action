@@ -10,17 +10,6 @@ import io.netty.util.CharsetUtil;
 //标记该类的实例可以被多个Channel共享
 @ChannelHandler.Sharable
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
-    /**
-     * 每当接收数据时，都会调用这个方法。
-     * 需要注意的是，由服务器发送的消息可能会被分块接收
-     * @param ctx
-     * @param msg
-     * @throws Exception
-     */
-    @Override
-    protected void messageReceived(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
-        System.out.println("Client received:" + msg.toString(CharsetUtil.UTF_8));
-    }
 
     /**
      * 当被通知Channel是活跃的时候，发送一条消息
@@ -36,5 +25,16 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace();
         ctx.close();
+    }
+    /**
+     * 每当接收数据时，都会调用这个方法。
+     * 需要注意的是，由服务器发送的消息可能会被分块接收
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
+        System.out.println("Client received:" + msg.toString(CharsetUtil.UTF_8));
     }
 }

@@ -22,7 +22,7 @@ public class UsingAttributes {
         bootstrap.group(new NioEventLoopGroup()).channel(NioSocketChannel.class)
                 .handler(new SimpleChannelInboundHandler<ByteBuf>() {
                              @Override
-                             protected void messageReceived(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
+                             protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
                                  System.out.println("Received data");
                              }
 

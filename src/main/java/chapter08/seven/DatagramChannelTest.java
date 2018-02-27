@@ -20,7 +20,7 @@ public class DatagramChannelTest {
         bootstrap.group(new OioEventLoopGroup()).channel(OioDatagramChannel.class).handler(
                 new SimpleChannelInboundHandler<DatagramPacket>() {
                     @Override
-                    public void messageReceived(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
+                    protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {
                         // Do something with the packet
                     }
                 }

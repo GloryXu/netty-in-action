@@ -4,6 +4,7 @@ import chapter09.two.two.AbsIntegerEncoder;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedChannel;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -12,6 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 public class AbsIntegerEncoderTest {
 
+    @Ignore
     @Test
     public void testEncoded() {
         ByteBuf buf = Unpooled.buffer();

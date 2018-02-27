@@ -19,7 +19,7 @@ public class BootstrapServerTest {
                 .channel(NioServerSocketChannel.class)
                 .childHandler(new SimpleChannelInboundHandler<ByteBuf>(){
             @Override
-            protected void messageReceived(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
+            protected void channelRead0(ChannelHandlerContext ctx, ByteBuf msg) throws Exception {
                 System.out.println("Received data");
             }
         });
